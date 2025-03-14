@@ -6,7 +6,7 @@ Python Script: Sorts files in the directory by creating folders either by name o
 I am a beginner programmer and this is my first script that I publish on Github. 
 It's a small project for myself and others.
 I think I will develop the script further.
-Feel free to give me feedback and suggestions for improvement:
+Feel free to give me feedback and suggestions for improvement.
 Thanks :)
 
 #
