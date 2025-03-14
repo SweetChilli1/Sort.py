@@ -4,8 +4,11 @@ Python Script: Sorts files in the directory by creating folders either by name o
 
 
 
-<h3>How to Install:</h3>
+## How to Install:
 
-<h5>Linux(Bash):</h5>
-'~$git clone https://github.com/SweetChilli1/Sort.py.git'
+### Linux(Bash):
+
+Clone the repository:
+'''bash
+git clone https://github.com/SweetChilli1/Sort.py.git
 
