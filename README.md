@@ -26,17 +26,10 @@ cd Sort.py
 ```
 
 
-#### Step 2: If not already present: Create the directory '~/bin/': 
+#### Step 2: Move Sort.py to'~/.local/bin/': 
 ```bash
-mkdir ~/bin
+mv Sort.py ~/.local/bin/ && cd ~/.local/bin
 ```
-
-
-#### And move Sort.py to ~/bin/:
-```bash
-mv Sort.py ~/bin/
-```
-
 
 #### Step 3: Make the file executable:
 ```bash
@@ -44,19 +37,7 @@ chmod +x Sort.py
 mv Sort.py Sort
 ```
 
-
-#### Step 4: Add the path from ~/bin/ to the .bashrc file, if not already present
-Open '.bashrc'
-```bash
-nano ~/.bashrc
-```
-Add this line at the end of the file (if ~/bin is not already included in the PATH):
-```bash
-export PATH="$HOME/bin:$PATH"
-```
-
-
-#### Step 5: Refresh terminal/ Clear the cache:
+#### Step 4: Refresh terminal/ Clear the cache:
 ```bash
 hash -r
 ```
