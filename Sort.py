@@ -5,55 +5,55 @@ import os
 import shutil
 from argparse import ArgumentParser
 
-def make_dir(datei, verzeichnis, faktor):                                #erstellt Ordner entweder nach Name oder Art der Daatei, und verschiebt die datein in die Richtigen ordner
+def make_dir(file, directory, mode):                                  # creates folders either by name or type of file, and moves the files to the correct folders
     try:
-        
-        ziel_ordner = os.path.join(verzeichnis, faktor[1:] if faktor[0] == '.' else faktor)
-        os.makedirs(ziel_ordner, exist_ok=True)
-        ziel_datei = os.path.join(ziel_ordner, datei)
-        shutil.move(datei, ziel_datei)
+        new_dir = os.path.join(directory, mode[1:] if mode[0] == '.' else mode)
+        os.makedirs(new_dir, exist_ok=True)
+        file_to_move  = os.path.join(new_dir, file)
+        shutil.move(file, file_to_move)
     except Exception as e:
-        print(f'Fehler beim verschieben von {datei}: {e}')
+        print(f'ERROR: When moving from: {file}: {e}')
 
-def daten_auslesen(daten, verzeichnis, wahl):                           #liest die datein im verzeichnis aus.
-    for datei in daten:
-        if os.path.isfile(datei):
-            try: 
-                name, art = os.path.splitext(datei)
-            except NameError:
-                pass
-            if wahl:
-                make_dir(datei, verzeichnis, name )
-            else:
-                make_dir(datei, verzeichnis, art)   
+def select_mode(file, directory, mode ):                              # select the mode
+    try: 
+        name, typ = os.path.splitext(file)
+    except NameError:
+        pass
+    if mode:
+        make_dir(file, directory, name )
+    else:
+        make_dir(file, directory, typ) 
+
+
+def read_files(files, directory, mode):                               # reads the files in the directory
+    for file in files:
+        if os.path.isfile(file):
+            select_mode(file, directory, mode)      
         else:
             pass
-
-def nach_namen_sortieren():
-    pass
 
 
 def main():
 
-    parser = ArgumentParser(description='Sortiert die Datein in verschiedene Ordner')
-    parser.add_argument( '-n', '--name', action='store_true', help='Sortiert das die Datein nach Namen ')
-    parser.add_argument( '-d', '--dictionary', help='Sortiert angegebenes Verzeichnis (Dictionary) auf')
+    parser = ArgumentParser(description='Sorts the files from a directory into different folders.')
+    parser.add_argument( '-n', '--name', action='store_true', help='Sorts the files by name.')
+    parser.add_argument( '-d', '--directory', help='Sorted specified directory')
     
     args = parser.parse_args()
 
-    aktuelles_verzeichnis = os.getcwd()
+    current_directory = os.getcwd()
 
-    if args.dictionary:
-        verzeichnis = os.listdir(args.dictionary)
+    if args.directory:                                     # checks if the parameter '--directory' was used
+        directory = os.listdir(args.directory)
     else:
-        verzeichnis = aktuelles_verzeichnis
+        directory = current_directory
     
-    dateien = os.listdir(verzeichnis)
+    files = os.listdir(directory)
 
-    if args.name:                                           #prüft ob der Parameter '--name' benutzt wurde
-        daten_auslesen(dateien, verzeichnis, True)
+    if args.name:                                           # checks if the parameter '--name' was used
+        read_files(files, directory, True)
     else:
-        daten_auslesen(dateien, verzeichnis, False)    
+        read_files(files, directory, False)    
     
 
 
